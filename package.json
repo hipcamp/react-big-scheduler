@@ -35,7 +35,11 @@
     "build:exampledist": "npm run clean:exampledist && cpy src/css/style.css exampledist/static && cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.js",
     "example": "webpack-dev-server --config ./webpack/webpack-dev.config.js --hot",
     "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build",
-    "build:dll": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.dll.config.js"
+    "build:dll": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.dll.config.js",
+    "rimraf": "./node_modules/rimraf/bin.js",
+    "babel": "./node_modules/.bin/babel src -d dist",
+    "cpy": "cpy",
+    "less": "lessc --js"
   },
   "pre-commit": [
     "lint"
@@ -49,10 +53,10 @@
     "react-dnd": "^7.5.0",
     "react-dnd-html5-backend": "^7.5.0",
     "react-dom": "^16.8.6",
+    "rimraf": "^3.0.2",
     "rrule": "^2.6.0"
   },
   "devDependencies": {
-    "babel": "6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
