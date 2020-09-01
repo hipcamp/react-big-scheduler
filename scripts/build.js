@@ -40,16 +40,16 @@ async function build() {
 
     // transpiling and copy js
     process.stdout.write('Transpiling js with babel... \n');
-    const jsResult = await exec(`babel ${sourceDir} --out-dir ${jsTarget}`);
+    const jsResult = await exec(`npm run babel ${sourceDir} --out-dir ${jsTarget}`);
 
     // copy css
     process.stdout.write('Copying library style definitions... \n');
-    const cssResult = await exec(`cpy ${sourceDir}/css/style.css ${cssTarget}`);
+    const cssResult = await exec(`npm run cpy ${sourceDir}/css/style.css ${cssTarget}`);
 
     // compile antd-hack less into css and copy it into lib
     process.stdout.write('Implementing antd hack... \n');
-    const heckResult = await exec(
-      `lessc --js ${hackFileSource} ${hackFileOutputPath}`
+    const hackResult = await exec(
+      `less ${hackFileSource} ${hackFileOutputPath}`
     );
     // append lib/index.js with line importing antd-hack
     const linesToBeAdded = [
