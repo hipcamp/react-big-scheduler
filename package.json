@@ -38,7 +38,6 @@
     "build:dll": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.dll.config.js",
     "rimraf": "./node_modules/rimraf/bin.js",
     "babel": "./node_modules/.bin/babel src -d lib",
-    "cpy": "cpy",
     "less": "lessc --js"
   },
   "pre-commit": [

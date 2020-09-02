@@ -44,12 +44,12 @@ async function build() {
 
     // copy css
     process.stdout.write('Copying library style definitions... \n');
-    const cssResult = await exec(`npm run cpy ${sourceDir}/css/style.css ${cssTarget}`);
+    const cssResult = await exec(`mkdir -p ${cssTarget} && cp -R ${sourceDir}/css/style.css ${cssTarget}`);
 
     // compile antd-hack less into css and copy it into lib
     process.stdout.write('Implementing antd hack... \n');
     const hackResult = await exec(
-      `less ${hackFileSource} ${hackFileOutputPath}`
+      `npm run less ${hackFileSource} ${hackFileOutputPath}`
     );
     // append lib/index.js with line importing antd-hack
     const linesToBeAdded = [
