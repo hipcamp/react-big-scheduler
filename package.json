@@ -37,7 +37,7 @@
     "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build",
     "build:dll": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.dll.config.js",
     "rimraf": "./node_modules/rimraf/bin.js",
-    "babel": "./node_modules/.bin/babel src -d dist",
+    "babel": "./node_modules/.bin/babel src -d lib",
     "cpy": "cpy",
     "less": "lessc --js"
   },
