@@ -11,6 +11,7 @@ class ResourceView extends Component {
     schedulerData: PropTypes.object.isRequired,
     contentScrollbarHeight: PropTypes.number.isRequired,
     slotClickedFunc: PropTypes.func,
+    resourceCtaClickedFunc: PropTypes.func,
     slotItemTemplateResolver: PropTypes.func,
     toggleExpandFunc: PropTypes.func,
   }
@@ -20,6 +21,7 @@ class ResourceView extends Component {
       schedulerData,
       contentScrollbarHeight,
       slotClickedFunc,
+      resourceCtaClickedFunc,
       slotItemTemplateResolver,
       toggleExpandFunc,
     } = this.props
@@ -63,6 +65,13 @@ class ResourceView extends Component {
       }
       indents.push(indent)
 
+      let resourceCta = null
+      if (item.resourceCta) {
+        resourceCta = (
+          <div onClick={() => resourceCtaClickedFunc(item.slotId)} className={"resource-cta"}>{item.resourceCta}</div>
+        )
+      }
+
       let a =
         slotClickedFunc != undefined ? (
           <span className="slot-cell">
@@ -80,6 +89,7 @@ class ResourceView extends Component {
           <span className="slot-cell">
             {indents}
             <span className="slot-text">{item.slotName}</span>
+            {resourceCta}
           </span>
         )
       let slotItem = (
