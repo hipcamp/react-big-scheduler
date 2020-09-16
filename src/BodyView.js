@@ -18,16 +18,18 @@ class BodyView extends Component {
     let displayRenderData = renderData.filter(o => o.render)
     let tableRows = displayRenderData.map(item => {
       let rowCells = headers.map((header, index) => {
+        let className = ''
         let key = item.slotId + '_' + header.time
         let style = index === headers.length - 1 ? {} : { width: cellWidth }
+        const isToday = new Date(header.time).toLocaleDateString() === new Date().toLocaleDateString()
         if (!!header.nonWorkingTime) {
           style = { ...style, backgroundColor: config.nonWorkingTimeBodyBgColor }
         }
         if (item.groupOnly) {
           style = { ...style, backgroundColor: config.groupOnlySlotColor }
         }
-        if (new Date(header.time).toLocaleDateString() === new Date().toLocaleDateString()) {
-          style = { ...style, backgroundColor: config.todayBodyColor }
+        if (isToday) {
+          className = 'today'
         }
         if (!!behaviors.getNonAgendaViewBodyCellBgColorFunc) {
           let cellBgColor = behaviors.getNonAgendaViewBodyCellBgColorFunc(
@@ -40,7 +42,7 @@ class BodyView extends Component {
           }
         }
         return (
-          <td key={key} style={style}>
+          <td key={key} style={style} className={className}>
             <div></div>
           </td>
         )
