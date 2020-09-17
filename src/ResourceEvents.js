@@ -292,6 +292,7 @@ class ResourceEvents extends Component {
 
     let eventList = []
     resourceEvents.headerItems.forEach((headerItem, index) => {
+      console.log('header item', headerItem)
       if (headerItem.count > 0 || headerItem.summary != undefined) {
         let isTop =
           config.summaryPos === SummaryPos.TopRight ||
@@ -301,7 +302,9 @@ class ResourceEvents extends Component {
         let renderEventsMaxIndex =
           headerItem.addMore === 0 ? cellMaxEvents : headerItem.addMoreIndex
 
+        console.log('margin top', marginTop)
         headerItem.events.forEach((evt, idx) => {
+          console.log('idx', idx)
           if (idx < renderEventsMaxIndex && evt !== undefined && evt.render) {
             let durationStart = localeMoment(startDate)
             let durationEnd = localeMoment(endDate).add(1, 'days')
@@ -313,12 +316,14 @@ class ResourceEvents extends Component {
             let eventEnd = localeMoment(evt.eventItem.end)
             let isStart = eventStart >= durationStart
             let isEnd = eventEnd <= durationEnd
+            console.log(eventStart, eventEnd, durationStart, durationEnd)
             let left = index * cellWidth + (index > 0 ? 2 : 3)
             let width =
               evt.span * cellWidth - (index > 0 ? 5 : 6) > 0
                 ? evt.span * cellWidth - (index > 0 ? 5 : 6)
                 : 0
             let top = marginTop + idx * config.eventItemLineHeight
+            console.log('dates', eventStart, eventEnd, durationStart, durationEnd)
             let eventItem = (
               <DnDEventItem
                 {...this.props}
