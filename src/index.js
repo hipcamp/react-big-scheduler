@@ -243,6 +243,7 @@ class Scheduler extends Component {
           <td style={{ width: resourceTableWidth, verticalAlign: 'top' }}>
             <div className="resource-view">
               <div
+                className="resource-header"
                 style={{
                   overflow: 'hidden',
                   borderBottom: '1px solid #e9e9e9',

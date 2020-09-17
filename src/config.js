@@ -41,7 +41,6 @@ export default {
   nonWorkingTimeHeadColor: '#999999',
   nonWorkingTimeHeadBgColor: '#fff0f6',
   nonWorkingTimeBodyBgColor: '#fff0f6',
-  todayBodyColor: '#ff0000',
   summaryColor: '#666',
   summaryPos: SummaryPos.TopRight,
   groupOnlySlotColor: '#F8F8F8',
