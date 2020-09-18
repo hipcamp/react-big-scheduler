@@ -27,6 +27,7 @@ class BodyView extends Component {
         }
         if (item.groupOnly) {
           style = { ...style, backgroundColor: config.groupOnlySlotColor }
+          className = 'group-only'
         }
         if (isToday) {
           className = 'today'

@@ -124,7 +124,7 @@ class ResourceView extends Component {
 
       return (
         <tr key={item.slotId}>
-          <td data-resource-id={item.slotId} style={tdStyle}>
+          <td data-resource-id={item.slotId} style={tdStyle} className={item.groupOnly ? 'group-only' : ''}>
             {slotItem}
           </td>
         </tr>
