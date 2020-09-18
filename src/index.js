@@ -123,7 +123,7 @@ class Scheduler extends Component {
     eventItemTemplateResolver: PropTypes.func,
     dndSources: PropTypes.array,
     slotClickedFunc: PropTypes.func,
-    resourceCtaClickedFunc: PropTypes.func,
+    resourceClickedFunc: PropTypes.func,
     toggleExpandFunc: PropTypes.func,
     slotItemTemplateResolver: PropTypes.func,
     nonAgendaCellHeaderTemplateResolver: PropTypes.func,

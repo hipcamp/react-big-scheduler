@@ -849,7 +849,6 @@ export default class SchedulerData {
         hasChildren: false,
         expanded: true,
         render: true,
-        resourceCta: slot.resourceCta,
       }
       let id = slot.id
       let value = undefined

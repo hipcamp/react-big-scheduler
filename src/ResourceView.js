@@ -11,7 +11,6 @@ class ResourceView extends Component {
     schedulerData: PropTypes.object.isRequired,
     contentScrollbarHeight: PropTypes.number.isRequired,
     slotClickedFunc: PropTypes.func,
-    resourceCtaClickedFunc: PropTypes.func,
     slotItemTemplateResolver: PropTypes.func,
     toggleExpandFunc: PropTypes.func,
   }
@@ -21,7 +20,6 @@ class ResourceView extends Component {
       schedulerData,
       contentScrollbarHeight,
       slotClickedFunc,
-      resourceCtaClickedFunc,
       slotItemTemplateResolver,
       toggleExpandFunc,
     } = this.props
@@ -65,42 +63,46 @@ class ResourceView extends Component {
       }
       indents.push(indent)
 
-      let resourceCta = null
-      if (item.resourceCta) {
-        resourceCta = (
-          <div onClick={() => resourceCtaClickedFunc(item.slotId)} className={"resource-cta"}>{item.resourceCta}</div>
+      let resourceRightSide = null
+      if (item.resourceRightSide) {
+        resourceRightSide = (
+          <div className={"resource-right-side"}>{item.resourceRightSide}</div>
+        )
+      }
+      console.log(resourceRightSide, item.resourceRightSide)
+
+      let slotItem
+      if (slotClickedFunc != undefined) {
+        slotItem = (
+          <a
+            title={item.slotName}
+            className="overflow-text header2-text clickable"
+            style={{ textAlign: 'left' }}
+            onClick={() => slotClickedFunc(schedulerData, item)}
+          >
+            <span className="slot-cell">
+              {indents}
+              <span className="slot-text">{item.slotName}</span>
+              {resourceRightSide}
+            </span>
+          </a>
+        )
+      } else {
+        slotItem = (
+          <div
+            title={item.slotName}
+            className="overflow-text header2-text non-clickable"
+            style={{ textAlign: 'left' }}
+          >
+            <span className="slot-cell">
+              {indents}
+              <span className="slot-text">{item.slotName}</span>
+              {resourceRightSide}
+            </span>
+          </div>
         )
       }
 
-      let a =
-        slotClickedFunc != undefined ? (
-          <span className="slot-cell">
-            {indents}
-            <a
-              className="slot-text"
-              onClick={() => {
-                slotClickedFunc(schedulerData, item)
-              }}
-            >
-              {item.slotName}
-            </a>
-          </span>
-        ) : (
-          <span className="slot-cell">
-            {indents}
-            <span className="slot-text">{item.slotName}</span>
-            {resourceCta}
-          </span>
-        )
-      let slotItem = (
-        <div
-          title={item.slotName}
-          className="overflow-text header2-text"
-          style={{ textAlign: 'left' }}
-        >
-          {a}
-        </div>
-      )
       if (!!slotItemTemplateResolver) {
         let temp = slotItemTemplateResolver(
           schedulerData,
