@@ -315,7 +315,6 @@ class ResourceEvents extends Component {
             let isEnd = eventEnd <= durationEnd
             let left = index * cellWidth - index * 1
             let width = evt.span * cellWidth
-            let top = marginTop + idx * config.eventItemLineHeight
             let eventItem = (
               <DnDEventItem
                 {...this.props}
@@ -326,6 +325,7 @@ class ResourceEvents extends Component {
                 isInPopover={false}
                 left={left}
                 width={width}
+                top={0}
                 leftIndex={index}
                 rightIndex={index + evt.span}
               />

@@ -63,46 +63,19 @@ class ResourceView extends Component {
       }
       indents.push(indent)
 
-      let resourceRightSide = null
-      if (item.resourceRightSide) {
-        resourceRightSide = (
-          <div className={"resource-right-side"}>{item.resourceRightSide}</div>
-        )
-      }
-      console.log(resourceRightSide, item.resourceRightSide)
-
-      let slotItem
-      if (slotClickedFunc != undefined) {
-        slotItem = (
-          <a
-            title={item.slotName}
-            className="overflow-text header2-text clickable"
-            style={{ textAlign: 'left' }}
-            onClick={() => slotClickedFunc(schedulerData, item)}
-          >
-            <span className="slot-cell">
-              {indents}
-              <span className="slot-text">{item.slotName}</span>
-              {resourceRightSide}
-            </span>
-          </a>
-        )
-      } else {
-        slotItem = (
-          <div
-            title={item.slotName}
-            className="overflow-text header2-text non-clickable"
-            style={{ textAlign: 'left' }}
-          >
-            <span className="slot-cell">
-              {indents}
-              <span className="slot-text">{item.slotName}</span>
-              {resourceRightSide}
-            </span>
-          </div>
-        )
-      }
-
+      let slotItem = (
+        <div
+          title={item.slotName}
+          className="overflow-text header2-text"
+          style={{ textAlign: 'left' }}
+        >
+          <span className="slot-cell">
+            {indents}
+            <span className="slot-text">{item.slotName}</span>
+            {item.rightSide && <div className={'resource-right'}>{item.rightSide}</div>}
+          </span>
+        </div>
+      )
       if (!!slotItemTemplateResolver) {
         let temp = slotItemTemplateResolver(
           schedulerData,
@@ -126,7 +99,14 @@ class ResourceView extends Component {
 
       return (
         <tr key={item.slotId}>
-          <td data-resource-id={item.slotId} style={tdStyle} className={item.groupOnly ? 'group-only' : ''}>
+          <td
+            data-resource-id={item.slotId}
+            style={tdStyle}
+            className={item.groupOnly ? 'resource-group-only' : 'resource-row'}
+            onClick={() => {
+              slotClickedFunc(schedulerData, item)
+            }}
+          >
             {slotItem}
           </td>
         </tr>
