@@ -650,8 +650,8 @@ class EventItem extends Component {
 
     let a = (
       <a
-        className="timeline-event"
-        style={{ left: left, width: width, top: top }}
+      className={`timeline-event ${eventItem.type}`}
+      style={{ left: left, width: width, top: top }}
         onClick={() => {
           if (!!eventItemClick) {
             eventItemClick(schedulerData, eventItem)
