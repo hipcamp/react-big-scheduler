@@ -115,6 +115,7 @@ class Scheduler extends Component {
     newEvent: PropTypes.func,
     subtitleGetter: PropTypes.func,
     eventItemClick: PropTypes.func,
+    eventBoundingBoxClick: PropTypes.func,
     viewEventClick: PropTypes.func,
     viewEventText: PropTypes.string,
     viewEvent2Click: PropTypes.func,

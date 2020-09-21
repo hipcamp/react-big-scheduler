@@ -41,6 +41,7 @@ class EventItem extends Component {
     moveEvent: PropTypes.func,
     subtitleGetter: PropTypes.func,
     eventItemClick: PropTypes.func,
+    eventBoundingBoxClick: PropTypes.func,
     viewEventClick: PropTypes.func,
     viewEventText: PropTypes.string,
     viewEvent2Click: PropTypes.func,
@@ -574,6 +575,7 @@ class EventItem extends Component {
       isEnd,
       isInPopover,
       eventItemClick,
+      eventBoundingBoxClick,
       schedulerData,
       isDragging,
       connectDragSource,
@@ -650,8 +652,8 @@ class EventItem extends Component {
 
     let a = (
       <a
-      className={`timeline-event ${eventItem.type}`}
-      style={{ left: left, width: width, top: top }}
+        className={`timeline-event ${eventItem.type}`}
+        style={{ left: left, width: width, top: top }}
         onClick={() => {
           if (!!eventItemClick) {
             eventItemClick(schedulerData, eventItem)
@@ -667,7 +669,15 @@ class EventItem extends Component {
     return isDragging ? null : schedulerData._isResizing() ||
       config.eventItemPopoverEnabled == false ||
       eventItem.showPopover == false ? (
-      <div>{connectDragPreview(connectDragSource(a))}</div>
+      <div
+        onClick={() => {
+          if (eventItem.boundingBoxClickable && eventBoundingBoxClick) {
+            eventBoundingBoxClick(schedulerData, eventItem)
+          }
+        }}
+      >
+        {connectDragPreview(connectDragSource(a))}
+      </div>
     ) : (
       <Popover placement="bottomLeft" content={content} trigger="hover">
         {connectDragPreview(connectDragSource(a))}
