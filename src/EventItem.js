@@ -1,3 +1,4 @@
+import Item from 'antd/lib/list/Item'
 import Popover from 'antd/lib/popover'
 import 'antd/lib/popover/style/index.css'
 import { PropTypes } from 'prop-types'
@@ -656,9 +657,12 @@ class EventItem extends Component {
         leftOffset = leftOffset + cellWidth / 2
       }
     }
+
     let a = (
       <a
-        className={`timeline-event ${eventItem.type}`}
+        className={`timeline-event ${eventItem.type} ${
+          eventItem.boundingBoxClickable ? 'bounding-box-clickable' : ''
+        }`}
         style={{ left: leftOffset, width: width, top: top }}
         onClick={() => {
           if (!!eventItemClick) {
