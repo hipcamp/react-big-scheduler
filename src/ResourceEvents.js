@@ -313,8 +313,8 @@ class ResourceEvents extends Component {
             let eventEnd = localeMoment(evt.eventItem.end)
             let isStart = eventStart >= durationStart
             let isEnd = eventEnd <= durationEnd
-            let left = index * cellWidth - index * 1
-            let width = evt.span * cellWidth
+            let left = index * cellWidth - index * .2
+            let width = evt.span * cellWidth + 1
             let eventItem = (
               <DnDEventItem
                 {...this.props}
