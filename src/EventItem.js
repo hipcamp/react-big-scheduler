@@ -649,11 +649,17 @@ class EventItem extends Component {
         undefined,
       )
     }
-
+    let cellWidth = schedulerData.getContentCellWidth()
+    let leftOffset = left
+    if (eventItem.eventStartMidDay) {
+      if (new Date(eventItem.start) > new Date(schedulerData.startDate) - 1) {
+        leftOffset = leftOffset + cellWidth / 2
+      }
+    }
     let a = (
       <a
         className={`timeline-event ${eventItem.type}`}
-        style={{ left: left, width: width, top: top }}
+        style={{ left: leftOffset, width: width, top: top }}
         onClick={() => {
           if (!!eventItemClick) {
             eventItemClick(schedulerData, eventItem)
