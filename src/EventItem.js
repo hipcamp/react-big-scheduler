@@ -1,3 +1,4 @@
+import Item from 'antd/lib/list/Item'
 import Popover from 'antd/lib/popover'
 import 'antd/lib/popover/style/index.css'
 import { PropTypes } from 'prop-types'
@@ -41,6 +42,7 @@ class EventItem extends Component {
     moveEvent: PropTypes.func,
     subtitleGetter: PropTypes.func,
     eventItemClick: PropTypes.func,
+    eventBoundingBoxClick: PropTypes.func,
     viewEventClick: PropTypes.func,
     viewEventText: PropTypes.string,
     viewEvent2Click: PropTypes.func,
@@ -574,6 +576,7 @@ class EventItem extends Component {
       isEnd,
       isInPopover,
       eventItemClick,
+      eventBoundingBoxClick,
       schedulerData,
       isDragging,
       connectDragSource,
@@ -647,11 +650,20 @@ class EventItem extends Component {
         undefined,
       )
     }
+    let cellWidth = schedulerData.getContentCellWidth()
+    let leftOffset = left
+    if (eventItem.eventStartMidDay) {
+      if (new Date(eventItem.start) > new Date(schedulerData.startDate) - 1) {
+        leftOffset = leftOffset + cellWidth / 2
+      }
+    }
 
     let a = (
       <a
-        className="timeline-event"
-        style={{ left: left, width: width, top: top }}
+        className={`timeline-event ${eventItem.type} ${
+          eventItem.boundingBoxClickable ? 'bounding-box-clickable' : ''
+        }`}
+        style={{ left: leftOffset, width: width, top: top }}
         onClick={() => {
           if (!!eventItemClick) {
             eventItemClick(schedulerData, eventItem)
@@ -667,7 +679,15 @@ class EventItem extends Component {
     return isDragging ? null : schedulerData._isResizing() ||
       config.eventItemPopoverEnabled == false ||
       eventItem.showPopover == false ? (
-      <div>{connectDragPreview(connectDragSource(a))}</div>
+      <div
+        onClick={() => {
+          if (eventItem.boundingBoxClickable && eventBoundingBoxClick) {
+            eventBoundingBoxClick(schedulerData, eventItem)
+          }
+        }}
+      >
+        {connectDragPreview(connectDragSource(a))}
+      </div>
     ) : (
       <Popover placement="bottomLeft" content={content} trigger="hover">
         {connectDragPreview(connectDragSource(a))}
